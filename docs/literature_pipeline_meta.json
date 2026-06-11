@@ -1,0 +1,26 @@
+{
+  "count": 1400,
+  "source_counts": {
+    "crossref": 1400
+  },
+  "queries": [
+    "robot abstraction learning",
+    "robot world model planning control manipulation",
+    "embodied intelligence physical reasoning robot",
+    "latent state robot policy planning",
+    "sim-to-real robot control abstraction",
+    "robot representation learning control",
+    "robotic manipulation planning latent dynamics",
+    "offline robot learning planning control",
+    "tactile perception robot manipulation",
+    "multimodal robot world model",
+    "active perception robotics world model",
+    "model-based reinforcement learning robot control",
+    "state abstraction robotics control",
+    "hierarchical robot learning planning abstraction",
+    "symbolic robot planning grounding",
+    "closed-loop robot planning failure modes",
+    "observability robotics latent representation",
+    "physical reasoning robot learning"
+  ]
+}

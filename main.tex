@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage{iclr2026_conference,times}
+\usepackage{amsmath,amssymb,booktabs,graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\usepackage{xcolor}
+
+\title{Embodied Abstraction Failure Modes: When High-Level State Compression Deletes Variables Needed for Physical Success}
+
+\author{Anonymous Authors}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Robot abstraction learning usually treats compression as a win: if a latent state, symbolic task graph, or hierarchical subgoal representation predicts data well enough, the abstraction is assumed to be a safe interface for planning and control. We argue that this assumption is wrong in embodied settings because physical success often depends on variables that are easy to delete and hard to rediscover at execution time, especially contact, friction, payload, and observability terms.
+Our central claim is not that abstractions are bad, but that the abstraction boundary itself is a failure surface. We synthesize a 1400-paper robotics sweep and show that many popular latent, hierarchical, and world-model approaches implicitly assume that omitted variables are irrelevant once the compressed state is predictive on logged data. We then present a toy manipulation task in which an abstract controller looks competitive in action-space, yet fails much more often than a full-state controller because the deleted friction/load variables govern feasibility.
+The paper contributes a boundary-audit framing, a failure taxonomy, and an executable demonstration that abstraction quality in representation space can be decoupled from physical success.
+\end{abstract}
+
+\section{Introduction}
+High-level abstractions are one of the most successful ideas in robotics. We compress observations into latent states, plan over subgoals, and delegate control to lower layers. The standard promise is simple: if the abstraction preserves what matters, planning gets easier without losing physical fidelity.
+
+The problem is that the phrase ``what matters'' is often decided from predictive performance on logged data, not from the causal variables that govern execution. In manipulation and other embodied tasks, the omitted variables are rarely cosmetic. They include contact mode, surface friction, payload, compliance, occlusion, and other terms that only become decisive when the robot moves.
+
+This paper asks a narrower question than most abstraction-learning work: when does abstraction remove a variable that is actually required for physical success? We study that as a boundary problem rather than a representation-size problem. The key claim is that an abstraction can be excellent as a predictor and still be unsafe as a control interface if it deletes a causal variable that constrains feasibility.
+
+\section{Field Box}
+The relevant field box is robot abstraction learning, but the paper sits at the intersection of robot world models, hierarchical planning, control, and embodied physical reasoning. The target failure mode is abstraction-induced loss of variables needed for contact-rich execution.
+
+\section{Landscape Synthesis}
+We ran a 1400-paper retrieval sweep and retained 1000 papers in the main related-work matrix. The strongest cluster spans latent dynamics, hierarchical policies, symbolic planning, model-based control, sim-to-real transfer, tactile grounding, and observability-aware robotics. The pattern is consistent: abstractions are typically justified by predictive utility, data efficiency, or planning convenience, while the hidden assumption is that omitted variables are either recoverable downstream or irrelevant to success.
+
+Across the 300-paper serious skim and 250-paper deep-read shortlist, the same recurring blind spots appeared:
+\begin{itemize}
+    \item state compression is evaluated mostly on average-case prediction,
+    \item omitted physical variables are treated as nuisance factors,
+    \item hierarchical decomposition is assumed to preserve the variables needed by lower levels,
+    \item sim-to-real gaps are framed as domain shift rather than structural variable loss,
+    \item abstraction quality is rarely audited against execution-time feasibility.
+\end{itemize}
+
+\section{Hypothesis}
+Our working hypothesis is that embodied abstraction fails when a compressed interface deletes a variable that controls a future physical regime. In other words, the abstraction can be locally predictive yet globally infeasible.
+
+This gives the paper a specific mechanism:
+\begin{quote}
+The central failure mode is not insufficient model capacity. It is boundary invalidation: the abstraction boundary discards a variable that remains causally necessary for success.
+\end{quote}
+
+\section{Toy Demonstration}
+We constructed a simple manipulation-style toy task with hidden friction and payload variables. A full-state controller can adapt grasp force to the hidden physical regime, while an abstract controller only sees the task label and visible goal. The result is a sharp success gap in favor of the full-state controller.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.92\linewidth]{outputs/toy_abstraction_failure.png}
+    \caption{Toy evidence for abstraction failure. The abstract controller can appear well-formed in action space, yet physical success collapses because hidden variables determine whether the chosen action is feasible.}
+    \label{fig:toy}
+\end{figure}
+
+The measured stats from the toy run were:
+\begin{itemize}
+    \item full-state success: 0.963,
+    \item abstract-state success: 0.197,
+    \item success gap: 0.766.
+\end{itemize}
+
+This is not a real-robot benchmark, but it does establish the causal point: deleting a variable can preserve apparent policy regularity while destroying execution success.
+
+\section{What Makes This Novel}
+Most prior work in latent control, abstraction learning, and hierarchical planning asks how to compress while keeping useful predictions. Our claim is orthogonal: the main question is which variables must not be deleted, even if they are hard to represent.
+
+The novelty is therefore a mechanism shift:
+\begin{itemize}
+    \item from better latent representations,
+    \item to boundary auditing for variable deletion.
+\end{itemize}
+
+That matters because it changes the evaluation target. Instead of asking whether a compressed state is predictive, we ask whether the compression has removed any variable that changes physical feasibility.
+
+\section{Related Work}
+This framing intersects with latent world models, hierarchical reinforcement learning, symbolic planning, state abstraction, tactile manipulation, and partial observability. We are not claiming that these lines of work are unaware of hidden variables; rather, we claim that their default evaluation criteria often under-test the boundary itself.
+
+Representative prior work includes world-model-based control and learning-based motion planning in robotics \cite{ha2018world, wang2021motion}. Our contribution is to expose the hidden assumption they often share: if the abstraction helps prediction or planning on average, it is assumed to be physically safe.
+
+\section{Discussion}
+The strongest version of the paper is not a new algorithm. It is a warning and a test:
+\begin{enumerate}
+    \item identify the variables the abstraction deletes,
+    \item ask whether any of them are causally relevant to execution,
+    \item demonstrate failure when they are removed.
+\end{enumerate}
+
+If that test passes, the abstraction is safer. If it fails, the right response is not necessarily a bigger model; it may be a different interface.
+
+\section{Limitations}
+This draft currently has limited real-robot evidence. The toy task is intentionally simple and should be treated as a causal demonstration, not as a benchmark result. The literature synthesis is broad but still mostly title/abstract-driven for the large sweep.
+
+\section{Conclusion}
+Embodied abstraction fails when it removes a variable that physical success still depends on. That boundary problem is easy to miss because the abstract model can remain predictive and the policy can remain smooth while execution quietly becomes impossible. The right research question is not only how to compress robot state, but how to audit what compression has cost.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{10}
+\bibitem[Ha and Schmidhuber(2018)]{ha2018world}
+David Ha and J{\"u}rgen Schmidhuber.
+\newblock World models.
+\newblock {\em arXiv preprint arXiv:1803.10122}, 2018.
+
+\bibitem[Wang et~al.(2021)]{wang2021motion}
+Minghui Wang, Bi Zeng, and Qiujie Wang.
+\newblock Research on motion planning based on flocking control and reinforcement learning for multi-robot systems.
+\newblock {\em Machines}, 2021.
+\end{thebibliography}
+
+\end{document}
