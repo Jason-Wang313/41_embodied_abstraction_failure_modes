@@ -11,5 +11,5 @@
 9. Biggest weaknesses: novelty may be viewed as reframing of partial observability; real-robot evidence is still needed.
 10. Paper-readiness judgment: recovered working draft.
 11. Exact Downloads PDF path: C:/Users/wangz/Downloads/41.pdf
-12. GitHub URL: pending publish
-13. Desktop copy: pending orchestrator copy
+12. GitHub URL: https://github.com/Jason-Wang313/41_embodied_abstraction_failure_modes
+13. Desktop copy: C:/Users/wangz/OneDrive/Desktop/41.pdf
