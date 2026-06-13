@@ -1,0 +1,5 @@
+model,parameter,train_success,test_success
+Original abstract controller,fixed high squeeze,0.188500,0.187250
+Full-state controller,uses friction/load,0.958750,0.962250
+Tuned constant abstraction,squeeze=0.780,0.987750,0.986500
+Tuned visible-goal abstraction,intercept=0.780; slope=0.000,0.987750,0.986500

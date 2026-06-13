@@ -1,15 +1,42 @@
 # Final Audit
 
-1. Chosen thesis: embodied abstraction failure is a boundary problem where abstractions delete physically necessary variables.
-2. Field assumption broken: high-level abstractions remain sufficient as long as they are predictive on average.
-3. New central mechanism: abstraction-boundary audit that identifies omitted variables required for physical feasibility.
-4. Genuine novelty: shifts the paper from better latent representation to explicit detection of when abstraction invalidates control/planning success.
-5. Closest hostile prior work: hierarchical latent policy, state abstraction, and latent world-model papers that preserve useful compression but do not audit boundary validity.
-6. Literature coverage: broad automated robotics sweep with retained matrix plus synthesis notes.
-7. Proof/formal-claim status: no formal theorem; evidence is empirical and causal-demonstrative.
-8. Strongest evidence: toy task where full-state success is 0.963 and abstract-state success is 0.197, producing a 0.766 success gap after deleting hidden friction/load variables.
-9. Biggest weaknesses: novelty may be viewed as reframing of partial observability; real-robot evidence is still needed.
-10. Paper-readiness judgment: recovered working draft.
-11. Exact Downloads PDF path: C:/Users/wangz/Downloads/41.pdf
-12. GitHub URL: https://github.com/Jason-Wang313/41_embodied_abstraction_failure_modes
-13. Desktop copy: C:/Users/wangz/OneDrive/Desktop/41.pdf
+Paper: 41_embodied_abstraction_failure_modes
+
+Decision: kill/archive
+
+Submission-hardening version: v2
+
+## Original positive evidence
+
+- Original full-state controller success: 0.963.
+- Original abstract controller success: 0.197.
+- Original success gap: 0.766.
+- Original interpretation: deleting hidden friction/load variables caused physical failure.
+
+## V2 falsification
+
+- Tuned constant abstract controller: 0.988 train success, 0.987 held-out success.
+- Tuned visible-goal abstract controller: 0.988 train success, 0.987 held-out success.
+- Full-state controller: 0.959 train success, 0.962 held-out success.
+- The tuned constant abstraction beats the full-state controller on held-out trials.
+
+## Audit judgment
+
+The central toy evidence is invalid as support for the paper's thesis. The generated draft mostly demonstrated that one fixed abstract policy was poorly tuned, not that the abstraction deleted a necessary physical variable. The broader boundary-audit idea may still be useful, but this repository no longer contains a defensible submission claim.
+
+## Artifacts
+
+- Paper source: `main.tex`
+- Original experiment: `tools/run_toy_experiment.py`
+- V2 stress results: `docs/tuned_abstraction_stress.csv`
+- V2 stress table: `docs/tuned_abstraction_stress_table.tex`
+- Original figure: `outputs/toy_abstraction_failure.png`
+- Original stats: `outputs/toy_experiment_stats.json`
+- Build wrapper: `scripts/build_pdf.ps1`
+
+## PDF and repository
+
+- Canonical PDF: `C:/Users/wangz/Downloads/41.pdf`
+- Local tracked/generated PDF: removed after build
+- Desktop copy: absent
+- GitHub URL: `https://github.com/Jason-Wang313/41_embodied_abstraction_failure_modes`

@@ -18,7 +18,14 @@
 Robot abstraction learning usually treats compression as a win: if a latent state, symbolic task graph, or hierarchical subgoal representation predicts data well enough, the abstraction is assumed to be a safe interface for planning and control. We argue that this assumption is wrong in embodied settings because physical success often depends on variables that are easy to delete and hard to rediscover at execution time, especially contact, friction, payload, and observability terms.
 Our central claim is not that abstractions are bad, but that the abstraction boundary itself is a failure surface. We synthesize a 1400-paper robotics sweep and show that many popular latent, hierarchical, and world-model approaches implicitly assume that omitted variables are irrelevant once the compressed state is predictive on logged data. We then present a toy manipulation task in which an abstract controller looks competitive in action-space, yet fails much more often than a full-state controller because the deleted friction/load variables govern feasibility.
 The paper contributes a boundary-audit framing, a failure taxonomy, and an executable demonstration that abstraction quality in representation space can be decoupled from physical success.
+A v2 hardening stress invalidates the toy evidence as originally framed: a tuned constant abstract controller reaches 0.987 held-out success, exceeding the full-state controller's 0.962. This version should therefore be read as an archived failure case for the generated paper, not as a submission-ready claim.
 \end{abstract}
+
+\paragraph{V2 hardening note.}
+Submission-hardening version: v2. Decision: kill/archive. The tuned-abstraction
+stress falsifies the original toy support for the thesis. The boundary-audit idea
+may still be worth revisiting, but this repository no longer supports a
+submission claim.
 
 \section{Introduction}
 High-level abstractions are one of the most successful ideas in robotics. We compress observations into latent states, plan over subgoals, and delegate control to lower layers. The standard promise is simple: if the abstraction preserves what matters, planning gets easier without losing physical fidelity.
@@ -69,6 +76,17 @@ The measured stats from the toy run were:
 
 This is not a real-robot benchmark, but it does establish the causal point: deleting a variable can preserve apparent policy regularity while destroying execution success.
 
+\paragraph{V2 tuned-abstraction stress.}
+The strongest reviewer attack is that the abstract controller is poorly tuned
+rather than structurally doomed. Table~\ref{tab:tuned-abstraction} confirms that
+attack. A tuned constant squeeze selected on training trials reaches 0.987
+held-out success, higher than the full-state controller's 0.962. The visible-goal
+linear abstraction collapses to the same constant. The original toy therefore
+does not demonstrate that deleting hidden friction/load variables is necessary
+for failure in this environment; it mostly demonstrates a bad abstract policy.
+
+\input{docs/tuned_abstraction_stress_table.tex}
+
 \section{What Makes This Novel}
 Most prior work in latent control, abstraction learning, and hierarchical planning asks how to compress while keeping useful predictions. Our claim is orthogonal: the main question is which variables must not be deleted, even if they are hard to represent.
 
@@ -86,20 +104,21 @@ This framing intersects with latent world models, hierarchical reinforcement lea
 Representative prior work includes world-model-based control and learning-based motion planning in robotics \cite{ha2018world, wang2021motion}. Our contribution is to expose the hidden assumption they often share: if the abstraction helps prediction or planning on average, it is assumed to be physically safe.
 
 \section{Discussion}
-The strongest version of the paper is not a new algorithm. It is a warning and a test:
+The strongest version of the paper would not be a new algorithm. It would be a
+warning and a test:
 \begin{enumerate}
     \item identify the variables the abstraction deletes,
     \item ask whether any of them are causally relevant to execution,
     \item demonstrate failure when they are removed.
 \end{enumerate}
 
-If that test passes, the abstraction is safer. If it fails, the right response is not necessarily a bigger model; it may be a different interface.
+If that test passes, the abstraction is safer. If it fails, the right response is not necessarily a bigger model; it may be a different interface. The v2 stress shows that this draft has not yet built such a test: a tuned abstract controller solves the toy.
 
 \section{Limitations}
-This draft currently has limited real-robot evidence. The toy task is intentionally simple and should be treated as a causal demonstration, not as a benchmark result. The literature synthesis is broad but still mostly title/abstract-driven for the large sweep.
+This draft currently has limited real-robot evidence. More importantly, the v2 tuned-abstraction stress invalidates the toy task as evidence for the central thesis. The task is intentionally simple, but it is not even a valid causal demonstration once an abstract baseline is tuned. The literature synthesis is broad but still mostly title/abstract-driven for the large sweep.
 
 \section{Conclusion}
-Embodied abstraction fails when it removes a variable that physical success still depends on. That boundary problem is easy to miss because the abstract model can remain predictive and the policy can remain smooth while execution quietly becomes impossible. The right research question is not only how to compress robot state, but how to audit what compression has cost.
+Embodied abstraction can fail when it removes a variable that physical success still depends on. This generated draft, however, does not establish that claim: v2 hardening found a tuned abstract controller that outperforms the full-state controller in the toy. The right future research question remains how to audit what compression has cost, but this paper should be archived rather than submitted.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{10}

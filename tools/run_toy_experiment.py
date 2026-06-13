@@ -1,5 +1,6 @@
 import json
 import math
+import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs"
 DOCS = ROOT / "docs"
 OUT.mkdir(exist_ok=True)
+DOCS.mkdir(exist_ok=True)
 
 
 def simulate(seed=0, n=4000):
@@ -53,6 +55,96 @@ def simulate(seed=0, n=4000):
         "squeeze_full": squeeze_full,
         "squeeze_abs": squeeze_abs,
     }
+
+
+def success_for_squeeze(data, squeeze, subset):
+    load = data["load"]
+    mu = data["mu"]
+    grasp_quality = data["grasp_quality"]
+    damage = np.maximum(0.0, squeeze - (0.78 - 0.10 * load))
+    slip = np.maximum(0.0, (0.30 - mu) - 0.18 * grasp_quality - 0.12 * squeeze)
+    success = (damage < 0.1) & (slip <= 0.0)
+    return float(success[subset].mean())
+
+
+def tuned_abstraction_stress():
+    data = simulate(seed=0, n=8000)
+    train = np.arange(0, 4000)
+    test = np.arange(4000, 8000)
+    visible_goal = data["visible_goal"]
+
+    best_constant = None
+    for squeeze in np.linspace(0.10, 0.95, 171):
+        policy = np.full_like(visible_goal, squeeze)
+        train_success = success_for_squeeze(data, policy, train)
+        if best_constant is None or train_success > best_constant["train_success"]:
+            best_constant = {
+                "model": "Tuned constant abstraction",
+                "parameter": f"squeeze={squeeze:.3f}",
+                "train_success": train_success,
+                "test_success": success_for_squeeze(data, policy, test),
+            }
+
+    best_visible = None
+    for intercept in np.linspace(0.10, 0.95, 86):
+        for slope in np.linspace(-0.30, 0.30, 61):
+            policy = np.clip(intercept + slope * (visible_goal - 0.5), 0.0, 1.0)
+            train_success = success_for_squeeze(data, policy, train)
+            if best_visible is None or train_success > best_visible["train_success"]:
+                best_visible = {
+                    "model": "Tuned visible-goal abstraction",
+                    "parameter": f"intercept={intercept:.3f}; slope={slope:.3f}",
+                    "train_success": train_success,
+                    "test_success": success_for_squeeze(data, policy, test),
+                }
+
+    rows = [
+        {
+            "model": "Original abstract controller",
+            "parameter": "fixed high squeeze",
+            "train_success": float(data["success_abs"][train].mean()),
+            "test_success": float(data["success_abs"][test].mean()),
+        },
+        {
+            "model": "Full-state controller",
+            "parameter": "uses friction/load",
+            "train_success": float(data["success_full"][train].mean()),
+            "test_success": float(data["success_full"][test].mean()),
+        },
+        best_constant,
+        best_visible,
+    ]
+
+    csv_path = DOCS / "tuned_abstraction_stress.csv"
+    csv_path.write_text(
+        "model,parameter,train_success,test_success\n"
+        + "\n".join(
+            f"{row['model']},{row['parameter']},{row['train_success']:.6f},{row['test_success']:.6f}"
+            for row in rows
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    table_rows = [
+        f"{row['model']} & {row['train_success']:.3f} & {row['test_success']:.3f} \\\\"
+        for row in rows
+    ]
+    table = (
+        "\\begin{table}[t]\n"
+        "\\centering\n"
+        "\\caption{V2 tuned-abstraction stress. A tuned constant abstract controller beats the full-state controller on held-out trials, invalidating the original toy evidence as support for the paper's thesis.}\n"
+        "\\label{tab:tuned-abstraction}\n"
+        "\\begin{tabular}{lcc}\n"
+        "\\toprule\n"
+        "Controller & Train success & Test success \\\\\n"
+        "\\midrule\n"
+        + "\n".join(table_rows)
+        + "\n\\bottomrule\n"
+        "\\end{tabular}\n"
+        "\\end{table}\n"
+    )
+    (DOCS / "tuned_abstraction_stress_table.tex").write_text(table, encoding="utf-8")
+    print(json.dumps(rows, indent=2))
 
 
 def main():
@@ -99,7 +191,16 @@ def main():
                 f"- Success gap: {fail_gap:.3f}",
                 f"- Nominal squeeze error vs failure correlation: {corr:.3f}",
                 "",
-                "Interpretation: the abstract controller can be close in action-space to the full controller while still failing more often because the deleted variables control the feasible physical regime.",
+                "Original interpretation: the abstract controller can be close in action-space to the full controller while still failing more often because the deleted variables control the feasible physical regime.",
+                "",
+                "## V2 tuned-abstraction stress",
+                "",
+                "- Original abstract controller: 0.187 held-out success",
+                "- Full-state controller: 0.962 held-out success",
+                "- Tuned constant abstraction: 0.987 held-out success",
+                "- Tuned visible-goal abstraction: 0.987 held-out success",
+                "",
+                "V2 interpretation: the original toy interpretation is invalid. The environment can be solved by a tuned abstract constant action, so the old success gap reflects a weak abstract policy rather than a necessary failure of abstraction.",
             ]
         ),
         encoding="utf-8",
@@ -108,4 +209,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--stress-only" in sys.argv:
+        tuned_abstraction_stress()
+    else:
+        main()

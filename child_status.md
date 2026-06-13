@@ -1,20 +1,20 @@
 # Child Status 41
 
-Status: recovered_success
+Status: kill_archive
 Attempt: 2
-Stage: final_artifacts
+Stage: v2_submission_hardening
 
 Current facts:
 - Literature artifacts are present under `docs/`, including the related-work matrix and synthesis notes.
-- Toy experiment artifacts are present under `outputs/`.
-- `main.tex` builds cleanly with `pdflatex`.
-- Final PDF: `main.pdf` (4 pages, 137536 bytes).
-- Numbered batch PDF target: `C:/Users/wangz/Downloads/41.pdf`.
+- Original toy experiment artifacts are present under `outputs/`.
+- V2 tuned-abstraction stress artifacts are present at `docs/tuned_abstraction_stress.csv` and `docs/tuned_abstraction_stress_table.tex`.
+- The v2 stress invalidates the original toy evidence: a tuned constant abstract controller reaches 0.987 held-out success, exceeding the full-state controller's 0.962.
+- Canonical PDF target: `C:/Users/wangz/Downloads/41.pdf`.
+- Canonical PDF size: 141327 bytes.
+- Local generated paper PDF is removed after build.
+- Desktop PDF copy is absent.
 
-Recovery note:
-- Original attempt 2 failed because natbib cached a numeric/manual bibliography state and no output PDF was produced.
-- Recovery added author-year labels to the manual bibliography, cleaned stale TeX intermediates, and rebuilt from scratch.
+Decision:
+- Kill/archive. Do not submit this generated paper as a workshop claim.
 
-Exit code: 0
-End time: 2026-06-12 00:42:31 +01:00
-PDF exists: True
+End time: 2026-06-13 08:46:50 +01:00
