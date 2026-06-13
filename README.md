@@ -1,22 +1,40 @@
 # Embodied Abstraction Failure Modes
 
-Recovered paper 41 in the robotics 60-paper batch.
+Paper 41 in the robotics 60-paper batch.
+
+## V2 hardening decision
+
+Decision: kill/archive.
+
+The original toy result supported the draft only when the abstract controller was fixed badly. A v2 tuned-abstraction stress selects an abstract constant squeeze on training trials and reaches 0.987 held-out success, exceeding the full-state controller's 0.962. The generated paper is therefore archived as a failed submission candidate, not treated as a workshop-ready claim.
+
+Canonical PDF: `C:/Users/wangz/Downloads/41.pdf`
 
 ## Contents
 
-- `main.tex` and `main.pdf`: ICLR-style paper source and built PDF.
-- `outputs/toy_abstraction_failure.png`: toy experiment figure used in the paper.
-- `outputs/toy_experiment_stats.json`: measured toy results.
+- `main.tex`: ICLR-style paper source with the v2 archive notice.
+- `outputs/toy_abstraction_failure.png`: original toy experiment figure.
+- `outputs/toy_experiment_stats.json`: original toy results.
+- `docs/tuned_abstraction_stress.csv`: v2 stress-test results.
 - `docs/`: literature matrix, novelty notes, reviewer attacks, and final audit.
-- `tools/`: scripts used to gather literature and run the toy experiment.
+- `tools/`: scripts used to gather literature and run the toy and stress experiments.
 
-## Build
+## Reproduce
 
-Run:
+Run the original toy experiment:
 
 ```powershell
-pdflatex -interaction=nonstopmode -halt-on-error main.tex
-pdflatex -interaction=nonstopmode -halt-on-error main.tex
+python tools/run_toy_experiment.py
 ```
 
-The recovered build produced `main.pdf` with 4 pages.
+Run the v2 tuned-abstraction stress:
+
+```powershell
+python tools/run_toy_experiment.py --stress-only
+```
+
+Build the canonical PDF:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/build_pdf.ps1
+```

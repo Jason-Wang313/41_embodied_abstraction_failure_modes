@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\caption{V2 tuned-abstraction stress. A tuned constant abstract controller beats the full-state controller on held-out trials, invalidating the original toy evidence as support for the paper's thesis.}
+\label{tab:tuned-abstraction}
+\begin{tabular}{lcc}
+\toprule
+Controller & Train success & Test success \\
+\midrule
+Original abstract controller & 0.189 & 0.187 \\
+Full-state controller & 0.959 & 0.962 \\
+Tuned constant abstraction & 0.988 & 0.987 \\
+Tuned visible-goal abstraction & 0.988 & 0.987 \\
+\bottomrule
+\end{tabular}
+\end{table}
