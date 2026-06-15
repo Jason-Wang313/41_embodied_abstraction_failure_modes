@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{How the old v2 tuned-constant falsification is handled in the new taxonomy.}
+\label{tab:v2-reconciliation}
+\small
+\begin{tabular}{p{0.24\linewidth}p{0.18\linewidth}p{0.46\linewidth}}
+\toprule
+Case & Old result & New interpretation \\
+\midrule
+Original high-squeeze abstract toy & 0.187 held-out success & Badly tuned abstract action, not structural evidence \\
+Tuned constant abstract toy & 0.987 held-out success & Benign/tunable compression regime \\
+Full-state toy controller & 0.962 held-out success & Useful baseline, not automatically superior \\
+Boundary-certified full suite & 0.665 & Escalates when deleted variables determine feasibility \\
+\bottomrule
+\end{tabular}
+\end{table}

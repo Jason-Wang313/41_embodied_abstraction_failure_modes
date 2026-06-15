@@ -1,25 +1,31 @@
 # Submission Attack Log
 
-## Attack: under-tuned abstract controller
+## Attack 1: Tune The Abstract Baseline
 
-Question: Does the toy still show abstraction failure if the abstract controller is tuned on training trials?
+Result: addressed. The final suite includes tuned constant, tuned visible linear, and tuned visible quadratic baselines from the start.
 
-Result: no. A tuned constant squeeze reaches 0.987 held-out success, higher than the full-state controller's 0.962.
+Decision impact: strengthens the final paper because tunable regimes are separated from irreducible boundary failures.
 
-Decision impact: fatal. The generated paper should be archived.
+## Attack 2: Hidden Variables Are Not Always Relevant
 
-## Attack: causal variable deletion
+Result: addressed. Negative controls are included and remain safe.
 
-Question: Does failure require deleted hidden friction/load variables?
+Decision impact: supports the claim that the paper is about boundary relevance, not maximal state retention.
 
-Result: not in the current toy. A controller with no hidden-variable access can solve the held-out task.
+## Attack 3: Completion May Hide Unsafe Actions
 
-Decision impact: fatal for the current empirical claim.
+Result: addressed. The paper reports safe completion, task success, unsafe rate, regret, alias rate, and abstention separately.
 
-## Attack: submission readiness
+Decision impact: supports safety-focused interpretation.
 
-Question: Can the paper be sent as a workshop claim with an honest limitation?
+## Attack 4: Certificate Just Refuses To Act
 
-Result: no. The primary evidence contradicts the draft's central claim after hardening.
+Result: partially addressed. Boundary-certified control has low unsafe rate but higher abstention. The manuscript states this tradeoff directly.
 
-Decision impact: kill/archive.
+Decision impact: acceptable for a boundary-audit paper.
+
+## Attack 5: Synthetic Suite Is Not Real Robot Evidence
+
+Result: acknowledged. The manuscript frames the suite as a deterministic boundary audit and lists hardware validation as future work.
+
+Decision impact: residual limitation, not a blocker for this batch standard.

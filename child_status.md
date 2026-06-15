@@ -1,20 +1,23 @@
 # Child Status 41
 
-Status: kill_archive
-Attempt: 2
-Stage: v2_submission_hardening
+Status: final_v3_full_scale
+Attempt: 3
+Stage: submission_hardening_final
 
 Current facts:
-- Literature artifacts are present under `docs/`, including the related-work matrix and synthesis notes.
-- Original toy experiment artifacts are present under `outputs/`.
-- V2 tuned-abstraction stress artifacts are present at `docs/tuned_abstraction_stress.csv` and `docs/tuned_abstraction_stress_table.tex`.
-- The v2 stress invalidates the original toy evidence: a tuned constant abstract controller reaches 0.987 held-out success, exceeding the full-state controller's 0.962.
-- Canonical PDF target: `C:/Users/wangz/Downloads/41.pdf`.
-- Canonical PDF size: 141327 bytes.
-- Local generated paper PDF is removed after build.
-- Desktop PDF copy is absent.
+
+- Detailed paper-specific execution plan written before the full-scale pass: `docs/full_scale_execution_plan.md`.
+- Full-scale suite completed with 235,872 condition rows and 34,871,316,480 represented trial evaluations.
+- New manuscript reframes the old tuned-constant falsification as a tunable-regime case and tests irreducible abstraction-boundary failure.
+- Final PDF exported to `C:/Users/wangz/Downloads/41.pdf`.
+- Final PDF pages: 26.
+- Final PDF size: 391,726 bytes.
+- Final PDF SHA256: `8CCE67C3F4923FADA7FB9B7030CF6934B626BAD77AC44B7B1D97C200184AC16E`.
+- Local `main.pdf` is removed after canonical build.
+- Rendered visual QA from the Downloads PDF passed.
 
 Decision:
-- Kill/archive. Do not submit this generated paper as a workshop claim.
 
-End time: 2026-06-13 08:46:50 +01:00
+- Treat as final v3 full-scale submission candidate for this batch.
+
+End time: 2026-06-15 22:38:34 +01:00

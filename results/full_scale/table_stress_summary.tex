@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{Stress tests averaged over all controllers and masks.}
+\label{tab:stress-summary}
+\small
+\begin{tabular}{lccccc}
+\toprule
+Stress & Safe comp. & Regret & Unsafe & Alias & Irred. \\
+\midrule
+adversarial\_boundary\_swap & 0.474 & 0.442 & 0.269 & 0.670 & 0.374 \\
+combined\_shift & 0.632 & 0.255 & 0.174 & 0.545 & 0.181 \\
+rare\_regime\_upweight & 0.686 & 0.231 & 0.143 & 0.513 & 0.167 \\
+delayed\_tactile & 0.689 & 0.211 & 0.143 & 0.524 & 0.145 \\
+friction\_shift & 0.708 & 0.206 & 0.133 & 0.504 & 0.142 \\
+sensor\_noise & 0.673 & 0.204 & 0.151 & 0.538 & 0.130 \\
+geometry\_shift & 0.710 & 0.202 & 0.132 & 0.505 & 0.138 \\
+payload\_shift & 0.720 & 0.197 & 0.127 & 0.499 & 0.135 \\
+in\_distribution & 0.777 & 0.152 & 0.098 & 0.474 & 0.096 \\
+\bottomrule
+\end{tabular}
+\end{table}

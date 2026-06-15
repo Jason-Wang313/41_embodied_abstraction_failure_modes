@@ -22,10 +22,12 @@ try {
     Copy-Item -LiteralPath $LocalPdf -Destination $DownloadsPdf -Force
     Remove-Item -LiteralPath $LocalPdf -Force
 
+    $hash = Get-FileHash -LiteralPath $DownloadsPdf -Algorithm SHA256
     $status = [ordered]@{
         paper = 41
-        decision = "kill/archive"
+        status = "final_v3_full_scale"
         canonical_pdf = $DownloadsPdf
+        canonical_sha256 = $hash.Hash
         local_pdf_removed = -not (Test-Path -LiteralPath $LocalPdf)
         built_at = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss zzz")
     }
