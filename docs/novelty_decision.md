@@ -1,24 +1,21 @@
 # Novelty Decision
 
-Chosen thesis: embodied abstraction failure is a boundary problem, not merely a representation-quality problem.
+Chosen thesis: embodied abstraction failure is a boundary-certification problem.
 
-Decision: kill/archive after v2 hardening
+Decision: proceed as final v3 full-scale candidate.
 
 Reasoning:
-- The literature strongly supports abstractions, latent states, hierarchical policies, and world models.
-- The weak point is not the existence of abstractions but whether they preserve physically necessary variables.
-- The strongest feasible paper would be an audit-and-demonstration paper about variable deletion at abstraction boundaries.
-- However, the generated toy evidence does not survive a tuned abstract baseline.
-- A tuned constant abstract controller reaches 0.987 held-out success, exceeding the full-state controller's 0.962.
-- The current draft should not be submitted because its central empirical support collapses.
+
+- Prior abstraction and world-model work studies compression, prediction, planning, and partial observability.
+- This paper focuses on the interface question: whether the compressed state preserves variables that change feasible safe actions.
+- The old tuned-constant result is incorporated as a tunable-regime case, raising the evidentiary standard.
+- The final suite includes tuned baselines, negative controls, mask ablations, stress tests, and certificate-aware controllers.
+- The contribution is a practical boundary audit and taxonomy, not a claim that all abstraction is unsafe.
 
 Rejected weaker directions:
-- bigger model
-- better data
-- new benchmark only
-- add uncertainty
-- add active learning
-- add verifier
-- combine two existing modules
-- use an LLM as planner
-- use reinforcement learning
+
+- claiming the old toy as positive proof,
+- arguing that full state is always required,
+- replacing the audit with a bigger latent model,
+- reporting only average task success,
+- hiding abstention or unsafe-rate tradeoffs.

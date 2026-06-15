@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{Abstraction mask ablation averaged over controllers and stresses.}
+\label{tab:mask-ablation}
+\small
+\begin{tabular}{lccccc}
+\toprule
+Mask & Safe comp. & Regret & Unsafe & Alias & Irred. \\
+\midrule
+full\_state & 0.807 & 0.107 & 0.100 & 0.195 & 0.113 \\
+visible\_plus\_contact & 0.773 & 0.137 & 0.114 & 0.285 & 0.129 \\
+visible\_history & 0.733 & 0.172 & 0.130 & 0.371 & 0.148 \\
+task\_object & 0.683 & 0.221 & 0.148 & 0.486 & 0.169 \\
+task\_only & 0.629 & 0.275 & 0.168 & 0.612 & 0.190 \\
+no\_hidden\_physics & 0.609 & 0.295 & 0.179 & 0.698 & 0.197 \\
+overcompressed\_latent & 0.591 & 0.318 & 0.185 & 0.760 & 0.196 \\
+random\_feature\_hash & 0.569 & 0.342 & 0.194 & 0.834 & 0.200 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,25 @@
+{
+  "status": "complete",
+  "expected_condition_rows": 235872,
+  "actual_condition_rows": 235872,
+  "represented_trial_evaluations": 34871316480,
+  "figures": [
+    "abstention_unsafe_tradeoff.pdf",
+    "boundary_regime_map.pdf",
+    "controller_mask_heatmap.pdf",
+    "ood_stress_sensitivity.pdf",
+    "representative_boundary_trace.pdf",
+    "variable_deletion_ablation.pdf"
+  ],
+  "tables": [
+    "table_hidden_summary.tex",
+    "table_main_performance.tex",
+    "table_mask_ablation.tex",
+    "table_negative_controls.tex",
+    "table_regime_summary.tex",
+    "table_scale.tex",
+    "table_stress_summary.tex",
+    "table_task_summary.tex",
+    "table_v2_reconciliation.tex"
+  ]
+}

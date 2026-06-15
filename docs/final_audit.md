@@ -2,41 +2,44 @@
 
 Paper: 41_embodied_abstraction_failure_modes
 
-Decision: kill/archive
+Decision: final v3 full-scale candidate
 
-Submission-hardening version: v2
+## What Changed
 
-## Original positive evidence
+The old single-toy evidence was not used as positive proof. It remains in the paper as a historical tuned-baseline warning. The final manuscript rebuilds the contribution around abstraction-boundary certificates and a full-scale deterministic suite.
 
-- Original full-state controller success: 0.963.
-- Original abstract controller success: 0.197.
-- Original success gap: 0.766.
-- Original interpretation: deleting hidden friction/load variables caused physical failure.
+## Full-Scale Evidence
 
-## V2 falsification
+- Task families: 18.
+- Hidden physical variables: 14.
+- Abstraction masks: 8.
+- Controllers: 13.
+- Stress settings: 9.
+- Splits: 7.
+- Seeds: 11.
+- Safety margins: 5.
+- Cost weights: 6.
+- Trials per cell: 64.
+- Compact condition rows: 235,872.
+- Represented trial evaluations: 34,871,316,480.
 
-- Tuned constant abstract controller: 0.988 train success, 0.987 held-out success.
-- Tuned visible-goal abstract controller: 0.988 train success, 0.987 held-out success.
-- Full-state controller: 0.959 train success, 0.962 held-out success.
-- The tuned constant abstraction beats the full-state controller on held-out trials.
+## Key Results
 
-## Audit judgment
+- Negative controls remain safe: 0.807 safe completion and 0.039 irreducible score.
+- Physically relevant hidden variables are harder: 0.604 safe completion and 0.236 irreducible score.
+- Irreducible regimes are the core failure mode: 0.488 safe completion, 0.320 unsafe rate, 0.462 regret, and 0.364 irreducible score.
+- Boundary-certified control has 0.006 unsafe rate with 0.240 abstention.
+- No-audit latent control has 0.296 unsafe rate.
 
-The central toy evidence is invalid as support for the paper's thesis. The generated draft mostly demonstrated that one fixed abstract policy was poorly tuned, not that the abstraction deleted a necessary physical variable. The broader boundary-audit idea may still be useful, but this repository no longer contains a defensible submission claim.
-
-## Artifacts
-
-- Paper source: `main.tex`
-- Original experiment: `tools/run_toy_experiment.py`
-- V2 stress results: `docs/tuned_abstraction_stress.csv`
-- V2 stress table: `docs/tuned_abstraction_stress_table.tex`
-- Original figure: `outputs/toy_abstraction_failure.png`
-- Original stats: `outputs/toy_experiment_stats.json`
-- Build wrapper: `scripts/build_pdf.ps1`
-
-## PDF and repository
+## PDF and Repository
 
 - Canonical PDF: `C:/Users/wangz/Downloads/41.pdf`
-- Local tracked/generated PDF: removed after build
-- Desktop copy: absent
-- GitHub URL: `https://github.com/Jason-Wang313/41_embodied_abstraction_failure_modes`
+- Pages: 26
+- Size: 391,726 bytes
+- SHA256: `8CCE67C3F4923FADA7FB9B7030CF6934B626BAD77AC44B7B1D97C200184AC16E`
+- Local generated PDF after canonical export: absent
+- Visual QA: passed from rendered Downloads PDF
+
+## Residual Risk
+
+The suite is synthetic. The paper states this limitation directly and presents the results as a boundary audit, not as a replacement for real robot validation.

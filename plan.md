@@ -1,11 +1,19 @@
 # Plan
 
-1. Build a reproducible literature pipeline in `tools/` and initialize all required artifacts in `docs/`.
-2. Sweep about 1000 robotics and embodied-intelligence papers around abstraction learning, world models, planning, control, physical reasoning, and sim-to-real.
-3. Narrow to a serious 300-paper skim that tests whether the seed thesis survives contact with the literature.
-4. Deep-read 200 to 250 papers most relevant to hidden-variable loss, abstraction boundaries, observability, and physical failure modes.
-5. Build a 100-paper hostile prior-work set and extract, for each important paper, its claim, mechanism, assumptions, fixed variables, ignored failures, novelty erosion, and open gaps.
-6. Synthesize the field box, hidden assumptions, novelty boundary map, claims, reviewer attacks, and a novelty decision grounded in evidence.
-7. Draft a complete anonymous ICLR-style paper around the strongest defensible mechanism, not the seed hypothesis if the literature points elsewhere.
-8. Compile the paper, verify the PDF, copy the final PDF to `C:/Users/wangz/Downloads/41.pdf`, and keep the repo runnable.
-9. Publish the public GitHub repo `41_embodied_abstraction_failure_modes`, then write the final audit with an honest readiness judgment.
+1. Preserve the old tuned-constant stress as a historical negative result rather than hiding it.
+2. Write a paper-specific full-scale plan before changing code or manuscript.
+3. Rebuild the claim around abstraction-boundary certificates: benign, tunable, ambiguous, and irreducible regimes.
+4. Implement a RAM-light deterministic suite with tuned abstract baselines, negative controls, mask ablations, OOD stresses, and certificate-aware controllers.
+5. Generate compact aggregates, manuscript tables, and figures without writing raw per-trial dumps.
+6. Rewrite the manuscript into a final full-scale 25+ page paper grounded in the new results.
+7. Build locally, inspect rendered pages, and fix layout/log issues.
+8. Export only the final manuscript to `C:/Users/wangz/Downloads/41.pdf`.
+9. Verify page count, hash, text markers, visual render, and local-PDF removal.
+10. Update docs and validation artifacts.
+11. Commit and push before moving to Paper42.
+
+Outcome:
+
+- Completed through step 10.
+- Final PDF is 26 pages with SHA256 `8CCE67C3F4923FADA7FB9B7030CF6934B626BAD77AC44B7B1D97C200184AC16E`.
+- Commit and push remain required before Paper42.

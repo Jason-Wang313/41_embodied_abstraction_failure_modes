@@ -1,13 +1,22 @@
 # Reviewer Attacks
 
-1. This is just a restatement of partial observability.
-2. The toy evidence may not generalize to real robots.
-3. The paper claims novelty but only repackages existing abstraction and hierarchical RL ideas.
-4. The boundary audit may be descriptive rather than prescriptive.
-5. Physical variables are obvious in hindsight; the paper may not prove they were missing from prior abstractions.
-6. The evidence may not establish a causal link between deleted variables and failure.
-7. The abstract baseline may simply be badly tuned.
+1. This is just partial observability.
+   Response: the paper narrows the question to whether a specific interface deletes variables that change feasible safe actions.
 
-## V2 outcome
+2. Tuned abstract policies may solve the task.
+   Response: correct in tunable regimes; tuned constant, linear, and quadratic baselines are included and reported.
 
-Attack 7 succeeds. A tuned constant abstraction selected on training trials reaches 0.987 held-out success, while the full-state controller reaches 0.962. The current toy therefore does not establish the paper's central causal mechanism.
+3. The suite is synthetic.
+   Response: true; the manuscript presents it as a controlled boundary audit and states that real robot validation is future work.
+
+4. Abstention lowers completion.
+   Response: abstention is reported separately. Boundary-certified control trades completion for a 0.006 unsafe rate.
+
+5. The certificate may overcall risk.
+   Response: negative controls are included and have 0.807 safe completion with 0.039 irreducible score.
+
+6. The result may be a simulator artifact.
+   Response: the suite includes benign, tunable, ambiguous, and irreducible regimes under one deterministic code path, with all metrics and tables committed.
+
+7. The old toy was falsified.
+   Response: accepted. The final paper keeps the old result as a historical tunable-regime example and does not use it as positive proof.
