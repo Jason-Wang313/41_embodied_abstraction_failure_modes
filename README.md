@@ -10,9 +10,10 @@ Canonical PDF: `C:/Users/wangz/Downloads/41.pdf`
 
 - Pages: 26
 - File size: 391,726 bytes
-- SHA256: `8CCE67C3F4923FADA7FB9B7030CF6934B626BAD77AC44B7B1D97C200184AC16E`
+- SHA256: `9334E545BBDB8218703B8E53A8E15C410DE2BF0D4C9968A6CE77E1C4A0C39DEE`
 - Local `main.pdf` after canonical build: absent
 - Visual render check: passed
+- VLA-style link-box check: passed on pages 6, 7, 10, 12, 13, 16, and 17
 
 ## Core Result
 
