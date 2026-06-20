@@ -156,7 +156,8 @@ Completed on 2026-06-15.
 - Represented trial evaluations: 34,871,316,480.
 - Final manuscript pages: 26.
 - Canonical PDF: `C:/Users/wangz/Downloads/41.pdf`.
-- Canonical PDF SHA256: `8CCE67C3F4923FADA7FB9B7030CF6934B626BAD77AC44B7B1D97C200184AC16E`.
+- Canonical PDF SHA256: `9334E545BBDB8218703B8E53A8E15C410DE2BF0D4C9968A6CE77E1C4A0C39DEE`.
 - Local `main.pdf` after canonical build: absent.
 - Visual render check from Downloads PDF: passed.
+- VLA-style visible link-box QA completed on pages 6, 7, 10, 12, 13, 16, and 17, with 22 green citation boxes, 13 red internal-reference boxes, and 35 visible borders.
 - Log and text-marker scans: passed.

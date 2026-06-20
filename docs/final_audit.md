@@ -36,9 +36,10 @@ The old single-toy evidence was not used as positive proof. It remains in the pa
 - Canonical PDF: `C:/Users/wangz/Downloads/41.pdf`
 - Pages: 26
 - Size: 391,726 bytes
-- SHA256: `8CCE67C3F4923FADA7FB9B7030CF6934B626BAD77AC44B7B1D97C200184AC16E`
+- SHA256: `9334E545BBDB8218703B8E53A8E15C410DE2BF0D4C9968A6CE77E1C4A0C39DEE`
 - Local generated PDF after canonical export: absent
 - Visual QA: passed from rendered Downloads PDF
+- VLA-style link-box QA: affected pages 6, 7, 10, 12, 13, 16, and 17 rendered at 160 dpi; verified 22 green citation boxes, 13 red internal-reference boxes, and 35 visible `(0, 0, 1)` borders with no visual collisions.
 
 ## Residual Risk
 
